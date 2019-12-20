@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div>Foo22</div>
+    <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact">
+       <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#contact')}"></use>
+    </svg>
+    <div>Foo</div>
     <table>
       <thead>
         <tr>
@@ -40,4 +43,8 @@ export default {
 </script>
 
 <style scoped>
+.list-icon {
+  fill: currentColor;
+  color: red;
+}
 </style>

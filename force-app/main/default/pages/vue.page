@@ -5,6 +5,7 @@
   applyHtmlTag="false"
   docType="html-5.0"
   controller="ApiController">
+  <apex:slds />
 <html lang="ja">
 <head>
 <meta charset="utf-8"/>
