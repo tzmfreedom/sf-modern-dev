@@ -13,9 +13,11 @@
 <link rel="icon" href="/favicon.ico"/>
 <title>front</title>
 <link href="{!URLFOR($Resource.resource1, '/css/app.css')}" rel="preload" as="style"/>
+<link href="{!URLFOR($Resource.resource1, '/css/chunk-vendors.css')}" rel="preload" as="style"/>
 <link href="{!URLFOR($Resource.resource1, '/js/app.js')}" rel="preload" as="script"/>
 <link href="{!URLFOR($Resource.resource1, '/js/chunk-vendors.js')}" rel="preload" as="script"/>
 <link href="{!URLFOR($Resource.resource1, '/css/app.css')}" rel="stylesheet"/>
+<link href="{!URLFOR($Resource.resource1, '/css/chunk-vendors.css')}" rel="stylesheet"/>
 </head>
 <body>
 <noscript><strong>We're sorry but front doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
