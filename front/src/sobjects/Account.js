@@ -34,8 +34,8 @@ export default {
       }
     ]);
   },
-  findOne() {
-    return this.query("SELECT Id, Name, CreatedDate FROM Account LIMIT 1", [
+  findById(id) {
+    return this.query(`SELECT Id, Name, CreatedDate FROM Account WHERE id = '${id}'`, [
       {
         Id: "123",
         Name: "hogehoge",

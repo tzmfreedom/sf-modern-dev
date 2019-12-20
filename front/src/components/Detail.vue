@@ -25,7 +25,7 @@ import moment from 'moment'
 import Account from '@/sobjects/Account.js'
 
 export default {
-  name: 'Bar',
+  name: 'Detail',
   filters: {
     moment: (date) => {
       return moment(date).format('YYYY-MM-DD HH:mm:ss');
@@ -37,7 +37,7 @@ export default {
     }
   },
   async mounted() {
-    const account = await Account.findOne();
+    const account = await Account.findById(this.$route.params.id);
     this.account = account[0];
   }
 }

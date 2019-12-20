@@ -4,12 +4,16 @@
     <table>
       <thead>
         <tr>
+          <th></th>
           <th>Id</th>
           <th>Name</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(record, key) in records" :key="key">
+          <td>
+            <router-link :to="{name: 'detail', params: { id: record.Id }}">Detail</router-link>
+          </td>
           <td>{{ record.Id }}</td>
           <td>{{ record.Name }}</td>
         </tr>
@@ -22,7 +26,7 @@
 import Account from '@/sobjects/Account.js'
 
 export default {
-  name: 'Foo',
+  name: 'List',
   data() {
     return {
       records: [],

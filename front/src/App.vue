@@ -3,8 +3,7 @@
     <router-view></router-view>
     <ul>
     <li><router-link to="/">root</router-link></li>
-    <li><router-link to="/foo">foo</router-link></li>
-    <li><router-link to="/bar">bar</router-link></li>
+    <li><router-link to="/accounts">Account List</router-link></li>
     </ul>
   </div>
 </template>
