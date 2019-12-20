@@ -1,10 +1,12 @@
 <template>
   <div>
-    <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact">
-       <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#contact')}"></use>
-    </svg>
-    <div>Foo</div>
-    <table>
+    <h1>Account List</h1>
+    <b-table sticky-header striped hover :fields="fields" :items="records">
+      <template v-slot:cell(action)="data">
+        <router-link :to="{name: 'detail', params: { id: data.item.Id }}">Detail</router-link>
+      </template>
+    </b-table>
+    <!-- <table>
       <thead>
         <tr>
           <th></th>
@@ -21,7 +23,7 @@
           <td>{{ record.Name }}</td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
   </div>
 </template>
 
@@ -32,6 +34,11 @@ export default {
   name: 'List',
   data() {
     return {
+      fields: [
+        'action',
+        'Id',
+        'Name',
+      ],
       records: [],
     }
   },

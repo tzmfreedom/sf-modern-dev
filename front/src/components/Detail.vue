@@ -1,22 +1,22 @@
 <template>
   <div>
-    <h1>Account Detail</h1>
-    <table>
-      <tbody>
-        <tr>
-        <th>Id</th>
-        <td>{{ account.Id }}</td>
-        </tr>
-        <tr>
-        <th>Name</th>
-        <td>{{ account.Name }}</td>
-        </tr>
-        <tr>
-        <th>CreatedDate</th>
-        <td>{{ account.CreatedDate | moment }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <h1>Account Detail: {{ account.Name }}</h1>
+    <b-table-simple hover small caption-top responsive>
+    <b-tfoot>
+      <b-tr>
+        <b-th>Id</b-th>
+        <b-td>{{ account.Id }} </b-td>
+      </b-tr>
+      <b-tr>
+        <b-th>Name</b-th>
+        <b-td>{{ account.Name }} </b-td>
+      </b-tr>
+      <b-tr>
+        <b-th>CreatedDate</b-th>
+        <b-td>{{ account.CreatedDate | moment }} </b-td>
+      </b-tr>
+    </b-tfoot>
+  </b-table-simple>
   </div>
 </template>
 
