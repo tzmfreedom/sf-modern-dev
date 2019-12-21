@@ -33,15 +33,11 @@ export default {
     }
   },
   async mounted() {
-    const records = await Account.findAll()
-    this.records = records
+    const res = await Account.findAll()
+    this.records = res.records
   }
 }
 </script>
 
 <style scoped>
-.list-icon {
-  fill: currentColor;
-  color: red;
-}
 </style>

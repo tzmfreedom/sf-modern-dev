@@ -35,8 +35,8 @@ export default {
     }
   },
   async mounted() {
-    const account = await Account.findById(this.$route.params.id);
-    this.account = account[0];
+    const res = await Account.findById(this.$route.params.id);
+    this.account = res.records[0];
   }
 }
 </script>

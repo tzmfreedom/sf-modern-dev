@@ -4,8 +4,11 @@ public with sharing class ApiController {
     }
 
     @RemoteAction
-    public static List<SObject> query(String query) {
-        return Database.query(query);
+    public static Map<String, Object> query(String query) {
+        return new Map<String, Object> {
+            'success' => true,
+            'records' => Database.query(query)
+        };
     }
 
     @RemoteAction
@@ -16,15 +19,14 @@ public with sharing class ApiController {
             obj.put(property, properties.get(property));
         }
         try {
-            Database.SaveResult sr = Database.insert(sobject);
-            if (sr.isSuccess()) {
-                return new Map<String, Object>{
-                    'success' => true,
-                    'id' => sr.getId()
-                };
-            }
-        } catch (DmlException e) {
+            Database.SaveResult sr = Database.insert(obj);
+            return new Map<String, Object>{
+                'success' => true,
+                'id' => sr.getId()
+            };
+        } catch (Exception e) {
             return new Map<String, Object> {
+                'success' => false,
                 'error' => e.getMessage()
             };
         }

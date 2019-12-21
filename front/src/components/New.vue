@@ -37,10 +37,15 @@ export default {
   methods: {
     async onSubmit(e) {
       e.preventDefault()
-      const res = await Account.create(this.account)
-      if (res.success) {
-      //eslint-disable-next-line no-console
-        this.$router.push({ name: 'detail', params: { id: res.id }})
+      try {
+        const res = await Account.create(this.account)
+        if (res.success) {
+        //eslint-disable-next-line no-console
+          this.$router.push({ name: 'detail', params: { id: res.id }})
+        }
+      } catch(e) {
+        //eslint-disable-next-line no-console
+        console.log(e)
       }
     }
   }
