@@ -14,7 +14,9 @@
           type="text"
           required
           placeholder="Account Name"
+          :state="error.account.Name === ''"
         ></b-form-input>
+        <b-form-invalid-feedback id="input-live-feedback">{{ error.account.Name }}</b-form-invalid-feedback>
       </b-form-group>
 
       <b-button type="submit" variant="primary">Submit</b-button>
@@ -29,6 +31,11 @@ export default {
   name: 'New',
   data() {
     return {
+      error: {
+        account: {
+          Name: '',
+        }
+      },
       account: {
         Name: '',
       },
