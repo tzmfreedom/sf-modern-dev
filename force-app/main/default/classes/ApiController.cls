@@ -15,15 +15,18 @@ public with sharing class ApiController {
         for (String property : properties.keySet()) {
             obj.put(property, properties.get(property));
         }
-        Database.SaveResult sr = Database.insert(obj);
-        if (sr.isSuccess()) {
-            return new Map<String, Object>{
-                'success' => true,
-                'id' => sr.getId()
+        try {
+            Database.SaveResult sr = Database.insert(sobject);
+            if (sr.isSuccess()) {
+                return new Map<String, Object>{
+                    'success' => true,
+                    'id' => sr.getId()
+                };
+            }
+        } catch (DmlException e) {
+            return new Map<String, Object> {
+                'error' => e.getMessage()
             };
         }
-        return new Map<String, Object> {
-            'errors' => sr.getErrors()
-        };
     }
 }

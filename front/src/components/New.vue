@@ -40,7 +40,7 @@ export default {
       const res = await Account.create(this.account)
       if (res.success) {
       //eslint-disable-next-line no-console
-        console.log(res)
+        this.$router.push({ name: 'detail', params: { id: res.id }})
       }
     }
   }

@@ -2,6 +2,8 @@ export default {
   call(action, args, result) {
     return new Promise((resolve, reject) => {
       if (process.env.NODE_ENV === "production") {
+        //eslint-disable-next-line no-console
+        console.log(action, args);
         //eslint-disable-next-line no-undef
         Visualforce.remoting.Manager.invokeAction(
           action,
@@ -48,7 +50,7 @@ export default {
       },
     ]);
   },
-  create(type, properties) {
-    return this.call('ApiController.create', [type, properties], { success: true })
+  create(properties) {
+    return this.call('ApiController.create', ['Account', properties], { success: true, id: '123' })
   }
 };
