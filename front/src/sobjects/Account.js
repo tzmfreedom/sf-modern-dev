@@ -74,7 +74,7 @@ export default {
     });
   },
   createWithChildren(parent, children) {
-    return this.call('ApiController.create', ['Account', 'Contact', parent, children], {
+    return this.call('ApiController.createWithChildren', ['Account', 'Contact', parent, children], {
       success: true,
       id: "123"
     });

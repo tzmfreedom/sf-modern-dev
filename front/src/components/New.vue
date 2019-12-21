@@ -47,8 +47,14 @@ export default {
       try {
         const res = await Account.create(this.account)
         if (res.success) {
-        //eslint-disable-next-line no-console
-          this.$router.push({ name: 'detail', params: { id: res.id }})
+          this.$router.push({ name: 'detail', params: {
+            id: res.id,
+            notification: {
+              title: '完了通知',
+              content: `${res.id} を作成しました`,
+              variant: 'success',
+            },
+          }})
         }
       } catch(e) {
         //eslint-disable-next-line no-console

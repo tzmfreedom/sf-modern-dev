@@ -39,6 +39,11 @@ export default {
       if (confirm(`本当に削除しますか？: ${sfid}`)) {
         await Account.destroy(sfid)
         this.records.splice(index, 1);
+        this.$bvToast.toast(`${sfid} を削除しました`, {
+          title: '完了通知',
+          variant: 'success',
+          solid: true
+        })
       }
     }
   },

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Account Edit: {{ account.Name }}</h1>
+    <h1>Account Edit: {{ accountName }}</h1>
       <b-form @submit="onSubmit">
       <b-form-group
         id="input-group-1"
@@ -42,6 +42,7 @@ export default {
   async mounted() {
     const res = await Account.findById(this.$route.params.id)
     this.account = res.records[0]
+    this.accountName = this.account.Name
   },
   methods: {
     async onSubmit(e) {
@@ -49,8 +50,19 @@ export default {
       try {
         const res = await Account.update(this.account)
         if (res.success) {
-        //eslint-disable-next-line no-console
-          this.$router.push({ name: 'detail', params: { id: res.id }})
+          this.$bvToast.toast(`${res.id} を更新しました`, {
+            title: '完了通知',
+            variant: 'success',
+            solid: true
+          })
+          this.$router.push({ name: 'detail', params: {
+            id: res.id,
+            notification: {
+              title: '完了通知',
+              content: `${res.id} を更新しました`,
+              variant: 'success',
+            },
+          }})
         }
       } catch(e) {
         //eslint-disable-next-line no-console

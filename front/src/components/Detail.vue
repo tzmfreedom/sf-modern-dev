@@ -38,6 +38,14 @@ export default {
     }
   },
   async mounted() {
+    if (this.$route.params.notification) {
+      const notification = this.$route.params.notification
+      this.$bvToast.toast(notification.content, {
+        title: notification.title,
+        variant: notification.variant,
+        solid: true
+      })
+    }
     const res = await Account.findById(this.$route.params.id);
     this.account = res.records[0];
   }
