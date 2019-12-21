@@ -37,6 +37,7 @@ export default {
         }
       },
       account: {},
+      accountName: '',
     }
   },
   async mounted() {

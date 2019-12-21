@@ -773,11 +773,6 @@
     consola "^2.10.1"
     node-fetch "^2.6.0"
 
-"@salesforce-ux/design-system@^2.10.2":
-  version "2.10.2"
-  resolved "https://registry.yarnpkg.com/@salesforce-ux/design-system/-/design-system-2.10.2.tgz#ab71a7dc0d12f3240d0ffb0c9e9bcf0267cb0a1f"
-  integrity sha512-tIU5W2uO9npLSZm8AMNw6DCmvGLORJCmL52+AIdiXZnNO4ZFYyhwRb899NvjMYtnBkHMX/kYlbw/s/w3sRCgeQ==
-
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
   version "1.7.1"
   resolved "https://registry.npm.taobao.org/@soda/friendly-errors-webpack-plugin/download/@soda/friendly-errors-webpack-plugin-1.7.1.tgz#706f64bcb4a8b9642b48ae3ace444c70334d615d"
