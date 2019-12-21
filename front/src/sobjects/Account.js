@@ -47,13 +47,20 @@ export default {
   },
   findById(id) {
     return this.query(
-      `SELECT Id, Name, CreatedDate FROM Account WHERE id = '${id}'`,
+      `SELECT Id, Name, CreatedDate, (SELECT Id, LastName, FirstName FROM Contacts) FROM Account WHERE id = '${id}'`,
       {
         success: true,
         records: [
           {
             Id: "123",
             Name: "hogehoge",
+            Contacts: [
+              {
+                Id: "aaa",
+                LastName: "hoge",
+                FirstName: "fuga",
+              }
+            ],
             CreatedDate: 1536666350000
           }
         ]
@@ -62,6 +69,12 @@ export default {
   },
   create(properties) {
     return this.call("ApiController.create", ["Account", properties], {
+      success: true,
+      id: "123"
+    });
+  },
+  update(id, properties) {
+    return this.call("ApiController.update", ["Account", id, properties], {
       success: true,
       id: "123"
     });

@@ -17,6 +17,9 @@
       </b-tr>
     </b-tfoot>
   </b-table-simple>
+  <h2>Contact List</h2>
+  <b-table sticky-header striped hover :items="account.Contacts">
+  </b-table>
   </div>
 </template>
 

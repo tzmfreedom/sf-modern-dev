@@ -1,14 +1,13 @@
 <template>
   <div id="app">
     <div class="container">
-    <!-- <div class="container"> -->
-    <router-view></router-view>
-    <!-- </div> -->
     <ul class="menu">
     <li><router-link to="/">root</router-link></li>
     <li><router-link to="/accounts">Account List</router-link></li>
     <li><router-link to="/accounts/new">Account New</router-link></li>
+    <li><router-link to="/accounts/adv_new">Account Advanced New</router-link></li>
     </ul>
+    <router-view></router-view>
     </div>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Account New</h1>
+    <h1>Account Advanced New</h1>
       <b-form @submit="onSubmit">
       <b-form-group
         id="input-group-1"
@@ -18,7 +18,12 @@
         ></b-form-input>
         <b-form-invalid-feedback id="input-live-feedback">{{ error.account.Name }}</b-form-invalid-feedback>
       </b-form-group>
-
+      <b-button type="button" @click="addContact" >Add Contact</b-button>
+      <b-table sticky-header striped hover :fields="contactFields" :items="account.Contacts">
+        <template v-slot:cell(LastName)="data">
+          <b-form-input class="border-0 no-shadow p-1" type="number" v-model="data.value"></b-form-input>
+        </template>
+      </b-table>
       <b-button type="submit" variant="primary">Create</b-button>
     </b-form>
   </div>
@@ -28,7 +33,7 @@
 import Account from '@/sobjects/Account.js'
 
 export default {
-  name: 'New',
+  name: 'AdvancedNew',
   data() {
     return {
       error: {
@@ -38,10 +43,24 @@ export default {
       },
       account: {
         Name: '',
+        Contacts: [],
       },
+      contactFields: [
+        { key: 'Id' },
+        { key: 'LastName' },
+        { key: 'FirstName' },
+      ]
     }
   },
   methods: {
+    addContact(e) {
+      this.account.Contacts = this.account.Contacts.concat([
+        {
+          LastName: '',
+          Firstame: ''
+        }
+      ])
+    },
     async onSubmit(e) {
       e.preventDefault()
       try {
