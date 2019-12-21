@@ -1,4 +1,13 @@
-# SFDX App
+# Salesforce Modern Development Sample
+
+* Vue
+* Bootstrap-Vue
+  * no use SLDS because local development and restriction
+* JavaScript Remoting
+  * use mocked response on local
+* ES6
+
+## How
 
 1. create SFDX project from VSCode
 2. run command
@@ -44,11 +53,3 @@ cat << EOF | ../force-app/main/default/pages/vue.page
 EOF
 sfdx force:source:deploy --sourcepath ../force-app/main/default/pages/vue.page --json --loglevel fatal
 ```
-
-## Dev, Build and Test
-
-## Resources
-
-## Description of Files and Directories
-
-## Issues
