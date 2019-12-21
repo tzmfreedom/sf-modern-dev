@@ -1,11 +1,14 @@
 export default {
   query(query, result) {
+    return call('ApiController.query', [query], result)
+  },
+  call(action, args, result) {
     return new Promise((resolve, reject) => {
       if (process.env.NODE_ENV === "production") {
         //eslint-disable-next-line no-undef
         Visualforce.remoting.Manager.invokeAction(
-          "ApiController.query",
-          query,
+          action,
+          ...args,
           (result, event) => {
             if (event.status) {
               resolve(result);
@@ -42,5 +45,8 @@ export default {
         CreatedDate: 1536666350000,
       },
     ]);
+  },
+  create(type, properties) {
+    return this.call('ApiController.create', [type, properties], { success: true })
   }
 };
