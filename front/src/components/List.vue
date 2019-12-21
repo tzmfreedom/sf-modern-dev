@@ -4,7 +4,8 @@
     <b-table sticky-header striped hover :fields="fields" :items="records">
       <template v-slot:cell(action)="data">
         <router-link :to="{name: 'detail', params: { id: data.item.Id }}">Detail</router-link> |
-        <router-link :to="{name: 'edit', params: { id: data.item.Id }}">Edit</router-link>
+        <router-link :to="{name: 'edit', params: { id: data.item.Id }}">Edit</router-link> |
+        <a href="#" @click.prevent="destroy(data.item.Id, data.index)">Delete</a>
       </template>
       <template v-slot:cell(CreatedDate)="data">
         {{ data.value | moment }}
@@ -31,6 +32,14 @@ export default {
         { key: 'CreatedDate', sortable: true },
       ],
       records: [],
+    }
+  },
+  methods: {
+    async destroy(sfid, index) {
+      if (confirm(`本当に削除しますか？: ${sfid}`)) {
+        await Account.destroy(sfid)
+        this.records.splice(index, 1);
+      }
     }
   },
   async mounted() {

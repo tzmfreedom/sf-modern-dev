@@ -68,15 +68,26 @@ export default {
     );
   },
   create(properties) {
-    return this.call("ApiController.create", ["Account", properties], {
+    return this.call('ApiController.create', ['Account', properties], {
+      success: true,
+      id: "123"
+    });
+  },
+  createWithChildren(parent, children) {
+    return this.call('ApiController.create', ['Account', 'Contact', parent, children], {
       success: true,
       id: "123"
     });
   },
   update(id, properties) {
-    return this.call("ApiController.update", ["Account", id, properties], {
+    return this.call('ApiController.updateRecord', ['Account', id, properties], {
       success: true,
       id: "123"
+    });
+  },
+  destroy(id) {
+    return this.call('ApiController.destroy', [id], {
+      success: true,
     });
   }
 };
