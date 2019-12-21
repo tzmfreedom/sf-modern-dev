@@ -13,8 +13,8 @@ import App from './App.vue'
 const routes = [
   { path: '/', component: Root },
   { path: '/accounts', component: List },
-  { path: '/accounts/:id', name: 'detail', component: Detail }
-  { path: '/accounts/new', name: 'new', component: New }
+  { path: '/accounts/new', name: 'new', component: New },
+  { path: '/accounts/:id', name: 'detail', component: Detail },
 ]
 const router = new VueRouter({
   routes

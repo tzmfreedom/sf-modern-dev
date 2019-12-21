@@ -38,9 +38,9 @@ export default {
     async onSubmit(e) {
       e.preventDefault()
       const res = await Account.create(this.account)
-      //eslint-disable-next-line no-debugger
       if (res.success) {
-        alert(res)
+      //eslint-disable-next-line no-console
+        console.log(res)
       }
     }
   }

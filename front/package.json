@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && yarn deploy",
-    "deploy": "sfdx force:source:deploy -p ../force-app/main/default/staticresources/resource1",
+    "build": "vue-cli-service build",
+    "deploy": "yarn build && sfdx force:source:deploy -p ../force-app/main/default/staticresources/resource1",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

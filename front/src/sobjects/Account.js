@@ -1,7 +1,4 @@
 export default {
-  query(query, result) {
-    return call('ApiController.query', [query], result)
-  },
   call(action, args, result) {
     return new Promise((resolve, reject) => {
       if (process.env.NODE_ENV === "production") {
@@ -24,6 +21,9 @@ export default {
         resolve(result);
       }
     });
+  },
+  query(query, result) {
+    return this.call('ApiController.query', [query], result)
   },
   findAll() {
     return this.query("SELECT Id, Name FROM Account", [

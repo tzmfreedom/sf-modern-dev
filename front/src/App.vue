@@ -7,6 +7,7 @@
     <ul class="menu">
     <li><router-link to="/">root</router-link></li>
     <li><router-link to="/accounts">Account List</router-link></li>
+    <li><router-link to="/accounts/new">Account New</router-link></li>
     </ul>
     </div>
   </div>
