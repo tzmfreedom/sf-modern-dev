@@ -21,15 +21,13 @@
 </template>
 
 <script>
-import moment from 'moment'
 import Account from '@/sobjects/Account.js'
+import momentFilter from '@/filters/moment.js'
 
 export default {
   name: 'Detail',
   filters: {
-    moment: (date) => {
-      return moment(date).format('YYYY-MM-DD HH:mm:ss');
-    }
+    moment: momentFilter,
   },
   data() {
     return {

@@ -5,39 +5,29 @@
       <template v-slot:cell(action)="data">
         <router-link :to="{name: 'detail', params: { id: data.item.Id }}">Detail</router-link>
       </template>
+      <template v-slot:cell(CreatedDate)="data">
+        {{ data.value | moment }}
+      </template>
     </b-table>
-    <!-- <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Id</th>
-          <th>Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(record, key) in records" :key="key">
-          <td>
-            <router-link :to="{name: 'detail', params: { id: record.Id }}">Detail</router-link>
-          </td>
-          <td>{{ record.Id }}</td>
-          <td>{{ record.Name }}</td>
-        </tr>
-      </tbody>
-    </table> -->
   </div>
 </template>
 
 <script>
 import Account from '@/sobjects/Account.js'
+import momentFilter from '@/filters/moment.js'
 
 export default {
   name: 'List',
+  filters: {
+    moment: momentFilter
+  },
   data() {
     return {
       fields: [
-        'action',
-        'Id',
-        'Name',
+        { key: 'action' },
+        { key: 'Id', sortable: true },
+        { key: 'Name', sortable: true },
+        { key: 'CreatedDate', sortable: true },
       ],
       records: [],
     }

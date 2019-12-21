@@ -26,14 +26,16 @@ export default {
     return this.call('ApiController.query', [query], result)
   },
   findAll() {
-    return this.query("SELECT Id, Name FROM Account", [
+    return this.query("SELECT Id, Name, CreatedDate FROM Account ORDER BY CreatedDate DESC", [
       {
         Id: "123",
-        Name: "hogehoge"
+        Name: "hogehoge",
+        CreatedDate: 1536666350000,
       },
       {
         Id: "235",
-        Name: "aaaabbbb"
+        Name: "aaaabbbb",
+        CreatedDate: 1536666350000,
       }
     ]);
   },
