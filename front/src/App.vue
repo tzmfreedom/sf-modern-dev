@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <div class="container">
-    <ul class="menu">
-    <li><router-link to="/">root</router-link></li>
-    <li><router-link to="/accounts">Account List</router-link></li>
-    <li><router-link to="/accounts/new">Account New</router-link></li>
-    <li><router-link to="/accounts/adv_new">Account Advanced New</router-link></li>
-    </ul>
-    <router-view></router-view>
+      <b-navbar toggleable="lg" type="dark" variant="info">
+        <b-navbar-brand to="/">Vue on Salesforce</b-navbar-brand>
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <b-nav-item v-for="(menu, key) in menus" :key="key" :to="menu.to" :active="$route.path === menu.to">{{ menu.label }}</b-nav-item>
+          </b-navbar-nav>
+        </b-collapse>
+      </b-navbar>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -15,6 +17,24 @@
 <script>
 export default {
   name: 'app',
+  data() {
+    return {
+      menus: [
+        {
+          to: '/accounts',
+          label: 'List'
+        },
+        {
+          to: '/accounts/new',
+          label: 'New'
+        },
+        {
+          to: '/accounts/adv_new',
+          label: 'AdvancedNew'
+        },
+      ]
+    }
+  }
 }
 </script>
 
