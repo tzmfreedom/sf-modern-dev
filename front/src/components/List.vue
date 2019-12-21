@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Account List</h1>
-    <b-table sticky-header striped hover :fields="fields" :items="records">
+    <b-table id="account-list" sticky-header striped hover :fields="fields" :items="records">
       <template v-slot:cell(action)="data">
         <router-link :to="{name: 'detail', params: { id: data.item.Id }}">Detail</router-link> |
         <router-link :to="{name: 'edit', params: { id: data.item.Id }}">Edit</router-link> |

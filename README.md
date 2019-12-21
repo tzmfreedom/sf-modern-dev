@@ -20,6 +20,7 @@ cd front
 // npx yarn serve
 vim vue.config.js
 yarn add vue-router bootstrap bootstrap-vue moment
+yarn add -D jest @vue/test-utils vue-jest babel-jest flush-promises
 cat << EOF | ../force-app/main/default/pages/vue.page
 <apex:page sidebar="false"
   showHeader="false"
