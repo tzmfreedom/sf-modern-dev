@@ -20,8 +20,14 @@
       </b-form-group>
       <b-button type="button" @click="addContact" >Add Contact</b-button>
       <b-table sticky-header striped hover :fields="contactFields" :items="account.Contacts">
+        <template v-slot:cell(action)="data">
+          <a href="#" @click.prevent="deleteContact(data.index)">Delete</a>
+        </template>
         <template v-slot:cell(LastName)="data">
-          <b-form-input class="border-0 no-shadow p-1" type="number" v-model="data.value"></b-form-input>
+          <b-form-input class="border-0 no-shadow p-1" type="text" v-model="data.item.LastName"></b-form-input>
+        </template>
+        <template v-slot:cell(FirstName)="data">
+          <b-form-input class="border-0 no-shadow p-1" type="text" v-model="data.item.FirstName"></b-form-input>
         </template>
       </b-table>
       <b-button type="submit" variant="primary">Create</b-button>
@@ -46,6 +52,7 @@ export default {
         Contacts: [],
       },
       contactFields: [
+        { key: 'action' },
         { key: 'Id' },
         { key: 'LastName' },
         { key: 'FirstName' },
@@ -53,13 +60,18 @@ export default {
     }
   },
   methods: {
-    addContact(e) {
+    addContact() {
+      //eslint-disable-next-line no-console
+      console.log(this.account.Contacts)
       this.account.Contacts = this.account.Contacts.concat([
         {
           LastName: '',
-          Firstame: ''
+          FirstName: ''
         }
       ])
+    },
+    deleteContact(index) {
+      this.account.Contacts.splice(index, 1);
     },
     async onSubmit(e) {
       e.preventDefault()
