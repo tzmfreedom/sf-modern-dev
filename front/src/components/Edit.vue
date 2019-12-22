@@ -21,16 +21,20 @@
 
       <b-button type="submit" variant="primary">Update</b-button>
     </b-form>
+    <Overlay v-show="loading" />
   </div>
 </template>
 
 <script>
+import Overlay from '@/components/Overlay.vue'
 import Account from '@/sobjects/Account.js'
 
 export default {
   name: 'New',
+  components: { Overlay },
   data() {
     return {
+      loading: true,
       error: {
         account: {
           Name: '',
@@ -42,6 +46,7 @@ export default {
   },
   async mounted() {
     const res = await Account.findById(this.$route.params.id)
+    this.loading = false
     this.account = res.records[0]
     this.accountName = this.account.Name
   },
@@ -49,7 +54,9 @@ export default {
     async onSubmit(e) {
       e.preventDefault()
       try {
+        this.loading = true
         const res = await Account.update(this.account)
+        this.loading = false
         if (res.success) {
           this.$bvToast.toast(`${res.id} を更新しました`, {
             title: '完了通知',

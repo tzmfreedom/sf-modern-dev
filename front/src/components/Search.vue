@@ -37,10 +37,12 @@
         {{ data.value | moment }}
       </template>
     </b-table>
+    <Overlay v-show="loading" />
   </div>
 </template>
 
 <script>
+import Overlay from '@/componenets/Overlay.vue'
 import Account from '@/sobjects/Account.js'
 import momentFilter from '@/filters/moment.js'
 
@@ -49,8 +51,10 @@ export default {
   filters: {
     moment: momentFilter
   },
+  components: { Overlay },
   data() {
     return {
+      loading: false,
       search: {
         Name: ''
       },
@@ -67,7 +71,9 @@ export default {
   },
   methods: {
     async doSearch() {
+      this.loading = true
       const res = await Account.search(this.search)
+      this.loading = false
       this.records = res.records
       this.checks = []
       res.records.forEach(() => {
@@ -78,7 +84,9 @@ export default {
       //eslint-disable-next-line no-console
       console.log(this.checks.filter((c) => c !== false))
       if (confirm(`本当に削除しますか？: ${sfid}`)) {
+        this.loading = true
         await Account.destroy(sfid)
+        this.loading = false
         this.records.splice(index, 1);
         this.$bvToast.toast(`${sfid} を削除しました`, {
           title: '完了通知',
@@ -89,7 +97,9 @@ export default {
     }
   },
   async mounted() {
+    this.loading = true
     const res = await Account.findAll()
+    this.loading = false
     this.records = res.records
     this.checks = []
     res.records.forEach(() => {

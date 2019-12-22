@@ -32,16 +32,19 @@
       </b-table>
       <b-button type="submit" variant="primary">Create</b-button>
     </b-form>
+    <Overlay v-show="loading" />
   </div>
 </template>
 
 <script>
+import Overlay from '@/components/Overlay.vue'
 import Account from '@/sobjects/Account.js'
 
 export default {
   name: 'AdvancedNew',
   data() {
     return {
+      loading: false,
       error: {
         account: {
           Name: '',
@@ -76,6 +79,7 @@ export default {
     async onSubmit(e) {
       e.preventDefault()
       try {
+        this.loading = true
         const res = await Account.create(this.account)
         if (res.success) {
         //eslint-disable-next-line no-console
@@ -85,6 +89,7 @@ export default {
         //eslint-disable-next-line no-console
         console.log(e)
       }
+      this.loading = false
     }
   }
 }

@@ -21,16 +21,20 @@
 
       <b-button type="submit" variant="primary">Create</b-button>
     </b-form>
+    <Overlay v-show="loading" />
   </div>
 </template>
 
 <script>
+import Overlay from '@/components/Overlay.vue'
 import Account from '@/sobjects/Account.js'
 
 export default {
   name: 'New',
+  components: { Overlay },
   data() {
     return {
+      loading: false,
       error: {
         account: {
           Name: '',
@@ -45,7 +49,9 @@ export default {
     async onSubmit(e) {
       e.preventDefault()
       try {
+        this.loading = true
         const res = await Account.create(this.account)
+        this.loading = false
         if (res.success) {
           this.$router.push({ name: 'detail', params: {
             id: res.id,

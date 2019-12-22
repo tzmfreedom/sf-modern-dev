@@ -20,10 +20,12 @@
   <h2>Contact List</h2>
   <b-table sticky-header striped hover :items="account.Contacts">
   </b-table>
+  <Overlay v-show="loading" />
   </div>
 </template>
 
 <script>
+import Overlay from '@/components/Overlay.vue'
 import Account from '@/sobjects/Account.js'
 import momentFilter from '@/filters/moment.js'
 
@@ -32,8 +34,10 @@ export default {
   filters: {
     moment: momentFilter,
   },
+  components: { Overlay },
   data() {
     return {
+      loading: true,
       account: {},
     }
   },
@@ -47,6 +51,7 @@ export default {
       })
     }
     const res = await Account.findById(this.$route.params.id);
+    this.loading = false
     this.account = res.records[0];
   }
 }
