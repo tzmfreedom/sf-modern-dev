@@ -8,7 +8,7 @@ import Search from '@/components/Search.vue'
 
 export default [
   { path: '/', component: Root },
-  { path: '/accounts', component: List },
+  { path: '/accounts', name: 'list', component: List },
   { path: '/accounts/new', name: 'new', component: New },
   { path: '/accounts/adv_new', name: 'adv_new', component: AdvancedNew },
   { path: '/accounts/search', name: 'search', component: Search },

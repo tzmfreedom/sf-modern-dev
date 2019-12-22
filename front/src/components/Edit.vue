@@ -19,7 +19,8 @@
         <b-form-invalid-feedback id="input-live-feedback">{{ error.account.Name }}</b-form-invalid-feedback>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Update</b-button>
+      <b-button type="submit" variant="primary">Update</b-button>&nbsp;
+      <b-button :to="{name: 'detail', params: {id: account.Id}}">Back to Detail</b-button>
     </b-form>
     <Overlay v-show="loading" />
   </div>
