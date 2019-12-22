@@ -7,9 +7,12 @@ const fields = [
 ]
 
 export default class Account extends SObject {
+  static getSObjectType() { return 'Account' }
   static findAll() {
+    //eslint-disable-next-line no-console
+    console.log(this)
     return this.query(
-      `SELECT ${fields.join(',')} FROM ${this.name} ORDER BY CreatedDate DESC`,
+      `SELECT ${fields.join(',')} FROM ${this.getSObjectType()} ORDER BY CreatedDate DESC`,
       {
         success: true,
         records: [
@@ -29,7 +32,7 @@ export default class Account extends SObject {
   }
   static findById(id) {
     return this.query(
-      `SELECT ${fields.join(',')}, (SELECT Id, LastName, FirstName FROM Contacts) FROM ${this.name} WHERE id = '${id}'`,
+      `SELECT ${fields.join(',')}, (SELECT Id, LastName, FirstName FROM Contacts) FROM ${this.getSObjectType()} WHERE id = '${id}'`,
       {
         success: true,
         records: [
@@ -57,7 +60,7 @@ export default class Account extends SObject {
   }
   static search(params) {
     return this.query(
-      `SELECT ${fields.join(',')} FROM ${this.name} WHERE Name LIKE '%${params.Name}%'`,
+      `SELECT ${fields.join(',')} FROM ${this.getSObjectType()} WHERE Name LIKE '%${params.Name}%'`,
       {
         success: true,
         records: [

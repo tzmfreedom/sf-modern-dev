@@ -20,6 +20,7 @@
   <h2>Contact List</h2>
   <b-table sticky-header striped hover :items="account.Contacts">
   </b-table>
+  <b-button :to="{name: 'edit', params: { id: account.Id }}">Edit</b-button>
   <Overlay v-show="loading" />
   </div>
 </template>

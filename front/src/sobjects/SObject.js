@@ -26,13 +26,13 @@ export default class SObject {
     return this.call("ApiController.query", [query], result);
   }
   static create(properties) {
-    return this.call('ApiController.create', [this.name, properties], {
+    return this.call('ApiController.create', [this.getSObjectType(), properties], {
       success: true,
       id: "123"
     });
   }
   static update(id, properties) {
-    return this.call('ApiController.updateRecord', [this.name, id, properties], {
+    return this.call('ApiController.updateRecord', [this.getSObjectType(), id, properties], {
       success: true,
       id: "123"
     });
