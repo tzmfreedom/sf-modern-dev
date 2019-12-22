@@ -51,7 +51,7 @@ export default class Account extends SObject {
   }
   static search(params) {
     return this.query(
-      `SELECT Id, Name, CreatedDate FROM Account WHERE Name LIKE '${params.Name}'`,
+      `SELECT Id, Name, CreatedDate FROM Account WHERE Name LIKE '%${params.Name}% AND Id LIKE '%${params.Id}%''`,
       {
         success: true,
         records: [

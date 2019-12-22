@@ -1,24 +1,27 @@
 <template>
   <div>
     <h2>Account Search</h2>
-    <b-form @submit="doSearch">
-      <b-form-group
-        id="input-group-1"
-        label="Name:"
-        label-for="input-1"
-        description="Account Name"
-      >
-        <b-form-input
-          id="input-1"
-          v-model="search.Name"
-          type="text"
-          required
-          placeholder="Account Name"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-button type="submit" variant="primary">Search</b-button>
-    </b-form>
+    <b-row class="search-form">
+      <b-form @submit="doSearch">
+        <b-row>
+          <b-col sm="2">
+            <label for="name">Name:</label>
+          </b-col>
+          <b-col sm="2">
+            <b-form-input id="name" type="text" v-model="search.Name"></b-form-input>
+          </b-col>
+          <b-col sm="2">
+            <label for="id">Id:</label>
+          </b-col>
+          <b-col sm="2">
+            <b-form-input id="id" type="text" v-model="search.Id"></b-form-input>
+          </b-col>
+          <b-col sm="4">
+            <b-button type="submit" variant="primary">Search</b-button>
+          </b-col>
+        </b-row>
+      </b-form>
+    </b-row>
     <b-table id="account-list" sticky-header striped hover :fields="fields" :items="records">
       <template v-slot:cell(isCheck)="data">
        <b-form-checkbox
@@ -42,7 +45,7 @@
 </template>
 
 <script>
-import Overlay from '@/componenets/Overlay.vue'
+import Overlay from '@/components/Overlay.vue'
 import Account from '@/sobjects/Account.js'
 import momentFilter from '@/filters/moment.js'
 
@@ -110,4 +113,12 @@ export default {
 </script>
 
 <style scoped>
+.search-form {
+  border: solid #eee 1px;
+  margin: 20px;
+  padding: 20px;
+}
+.search-form label {
+  line-height: 2.25em;
+}
 </style>

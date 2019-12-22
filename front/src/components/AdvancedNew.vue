@@ -42,6 +42,7 @@ import Account from '@/sobjects/Account.js'
 
 export default {
   name: 'AdvancedNew',
+  components: { Overlay },
   data() {
     return {
       loading: false,
