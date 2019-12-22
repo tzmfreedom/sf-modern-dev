@@ -1,6 +1,24 @@
 <template>
   <div>
-    <h2>Account List</h2>
+    <h2>Account Search</h2>
+    <b-form @submit="doSearch">
+      <b-form-group
+        id="input-group-1"
+        label="Name:"
+        label-for="input-1"
+        description="Account Name"
+      >
+        <b-form-input
+          id="input-1"
+          v-model="search.Name"
+          type="text"
+          required
+          placeholder="Account Name"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-button type="submit" variant="primary">Search</b-button>
+    </b-form>
     <b-table id="account-list" sticky-header striped hover :fields="fields" :items="records">
       <template v-slot:cell(isCheck)="data">
        <b-form-checkbox
@@ -19,29 +37,26 @@
         {{ data.value | moment }}
       </template>
     </b-table>
-    <Overlay v-show="loading"/>
   </div>
 </template>
 
 <script>
-import Overlay from '@/components/Overlay.vue'
 import Account from '@/sobjects/Account.js'
 import momentFilter from '@/filters/moment.js'
 
 export default {
-  name: 'List',
+  name: 'Search',
   filters: {
     moment: momentFilter
   },
-  components: {
-    Overlay
-  },
   data() {
     return {
-      loading: true,
+      search: {
+        Name: ''
+      },
       fields: [
-        { key: 'isCheck', label: '', thStyle: { 'width': '50px' } },
-        { key: 'action', thStyle: { 'width': '200px' } },
+        { key: 'isCheck', label: '', thStyle: { width: '50px' } },
+        { key: 'action', thStyle: { width: '200px' } },
         { key: 'Id', sortable: true },
         { key: 'Name', sortable: true },
         { key: 'CreatedDate', sortable: true },
@@ -51,6 +66,14 @@ export default {
     }
   },
   methods: {
+    async doSearch() {
+      const res = await Account.search(this.search)
+      this.records = res.records
+      this.checks = []
+      res.records.forEach(() => {
+        this.checks.push(false)
+      })
+    },
     async destroy(sfid, index) {
       //eslint-disable-next-line no-console
       console.log(this.checks.filter((c) => c !== false))
@@ -72,7 +95,6 @@ export default {
     res.records.forEach(() => {
       this.checks.push(false)
     })
-    this.loading = false;
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Account New</h1>
-      <b-form @submit="onSubmit">
+    <b-form @submit="onSubmit">
       <b-form-group
         id="input-group-1"
         label="Name:"

@@ -49,4 +49,19 @@ export default class Account extends SObject {
       id: "123"
     });
   }
+  static search(params) {
+    return this.query(
+      `SELECT Id, Name, CreatedDate FROM Account WHERE Name LIKE '${params.Name}'`,
+      {
+        success: true,
+        records: [
+          {
+            Id: "xxx",
+            Name: "searched",
+            CreatedDate: 1536666350000
+          }
+        ]
+      }
+    );
+  }
 }

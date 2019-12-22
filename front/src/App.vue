@@ -25,6 +25,10 @@ export default {
           label: 'List'
         },
         {
+          to: '/accounts/search',
+          label: 'Search'
+        },
+        {
           to: '/accounts/new',
           label: 'New'
         },
@@ -34,7 +38,7 @@ export default {
         },
       ]
     }
-  }
+  },
 }
 </script>
 
