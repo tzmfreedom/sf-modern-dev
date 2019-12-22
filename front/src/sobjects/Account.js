@@ -1,9 +1,15 @@
 import SObject from '@/sobjects/SObject.js'
 
+const fields = [
+  'Id',
+  'Name',
+  'CreatedDate',
+]
+
 export default class Account extends SObject {
   static findAll() {
     return this.query(
-      "SELECT Id, Name, CreatedDate FROM Account ORDER BY CreatedDate DESC",
+      `SELECT ${fields.join(',')} FROM ${this.name} ORDER BY CreatedDate DESC`,
       {
         success: true,
         records: [
@@ -23,7 +29,7 @@ export default class Account extends SObject {
   }
   static findById(id) {
     return this.query(
-      `SELECT Id, Name, CreatedDate, (SELECT Id, LastName, FirstName FROM Contacts) FROM Account WHERE id = '${id}'`,
+      `SELECT ${fields.join(',')}, (SELECT Id, LastName, FirstName FROM Contacts) FROM ${this.name} WHERE id = '${id}'`,
       {
         success: true,
         records: [
@@ -51,7 +57,7 @@ export default class Account extends SObject {
   }
   static search(params) {
     return this.query(
-      `SELECT Id, Name, CreatedDate FROM Account WHERE Name LIKE '%${params.Name}% AND Id LIKE '%${params.Id}%''`,
+      `SELECT ${fields.join(',')} FROM ${this.name} WHERE Name LIKE '%${params.Name}%'`,
       {
         success: true,
         records: [

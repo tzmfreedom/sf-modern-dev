@@ -19,7 +19,7 @@
         <b-form-invalid-feedback id="input-live-feedback">{{ error.account.Name }}</b-form-invalid-feedback>
       </b-form-group>
       <b-button type="button" @click="addContact" >Add Contact</b-button>
-      <b-table sticky-header striped hover :fields="contactFields" :items="account.Contacts">
+      <b-table sticky-header striped hover :fields="contactFields" :items="contacts">
         <template v-slot:cell(action)="data">
           <a href="#" @click.prevent="deleteContact(data.index)">Delete</a>
         </template>
@@ -53,8 +53,8 @@ export default {
       },
       account: {
         Name: '',
-        Contacts: [],
       },
+      contacts: [],
       contactFields: [
         { key: 'action' },
         { key: 'Id' },
@@ -66,8 +66,8 @@ export default {
   methods: {
     addContact() {
       //eslint-disable-next-line no-console
-      console.log(this.account.Contacts)
-      this.account.Contacts = this.account.Contacts.concat([
+      console.log(this.contacts)
+      this.contacts = this.contacts.concat([
         {
           LastName: '',
           FirstName: ''
@@ -75,13 +75,13 @@ export default {
       ])
     },
     deleteContact(index) {
-      this.account.Contacts.splice(index, 1);
+      this.contacts.splice(index, 1);
     },
     async onSubmit(e) {
       e.preventDefault()
       try {
         this.loading = true
-        const res = await Account.create(this.account)
+        const res = await Account.createWithChildren(this.account, this.contacts)
         if (res.success) {
         //eslint-disable-next-line no-console
           this.$router.push({ name: 'detail', params: { id: res.id }})
