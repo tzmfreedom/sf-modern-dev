@@ -12,16 +12,16 @@
 1. create SFDX project from VSCode
 2. run command
 
-```
-cd /path/to/project
-npm install @vue/cli
-npx vue create front
-cd front
-// npx yarn serve
-vim vue.config.js
-yarn add vue-router bootstrap bootstrap-vue moment
-yarn add -D jest @vue/test-utils vue-jest babel-jest flush-promises
-cat << EOF | ../force-app/main/default/pages/vue.page
+```bash
+$ cd /path/to/project
+$ npm install @vue/cli
+$ npx vue create front
+$ cd front
+$ // npx yarn serve
+$ vim vue.config.js
+$ yarn add vue-router bootstrap bootstrap-vue moment
+$ yarn add -D jest @vue/test-utils vue-jest babel-jest flush-promises
+$ cat << EOF > ../force-app/main/default/pages/vue.page
 <apex:page sidebar="false"
   showHeader="false"
   standardStylesheets="false"
@@ -52,5 +52,5 @@ cat << EOF | ../force-app/main/default/pages/vue.page
 </html>
 </apex:page>
 EOF
-sfdx force:source:deploy --sourcepath ../force-app/main/default/pages/vue.page --json --loglevel fatal
+$ sfdx force:source:deploy --sourcepath ../force-app/main/default/pages/vue.page --json --loglevel fatal
 ```
