@@ -1,31 +1,7 @@
-export default {
-  call(action, args, result) {
-    return new Promise((resolve, reject) => {
-      if (process.env.NODE_ENV === "production") {
-        //eslint-disable-next-line no-undef
-        Visualforce.remoting.Manager.invokeAction(
-          action,
-          ...args,
-          (result, event) => {
-            if (event.status && result.success) {
-              resolve(result);
-            } else if (event.type === "exception") {
-              reject(result);
-            } else {
-              reject(result);
-            }
-          },
-          { escape: true }
-        );
-      } else {
-        resolve(result);
-      }
-    });
-  },
-  query(query, result) {
-    return this.call("ApiController.query", [query], result);
-  },
-  findAll() {
+import SObject from '@/sobjects/SObject.js'
+
+export default class Account extends SObject {
+  static findAll() {
     return this.query(
       "SELECT Id, Name, CreatedDate FROM Account ORDER BY CreatedDate DESC",
       {
@@ -44,8 +20,8 @@ export default {
         ]
       }
     );
-  },
-  findById(id) {
+  }
+  static findById(id) {
     return this.query(
       `SELECT Id, Name, CreatedDate, (SELECT Id, LastName, FirstName FROM Contacts) FROM Account WHERE id = '${id}'`,
       {
@@ -66,28 +42,11 @@ export default {
         ]
       }
     );
-  },
-  create(properties) {
-    return this.call('ApiController.create', ['Account', properties], {
-      success: true,
-      id: "123"
-    });
-  },
-  createWithChildren(parent, children) {
+  }
+  static createWithChildren(parent, children) {
     return this.call('ApiController.createWithChildren', ['Account', 'Contact', parent, children], {
       success: true,
       id: "123"
     });
-  },
-  update(id, properties) {
-    return this.call('ApiController.updateRecord', ['Account', id, properties], {
-      success: true,
-      id: "123"
-    });
-  },
-  destroy(id) {
-    return this.call('ApiController.destroy', [id], {
-      success: true,
-    });
   }
-};
+}

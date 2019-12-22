@@ -1,7 +1,15 @@
 <template>
   <div>
-    <h1>Account List</h1>
+    <h2>Account List</h2>
     <b-table id="account-list" sticky-header striped hover :fields="fields" :items="records">
+      <template v-slot:cell(isCheck)="data">
+       <b-form-checkbox
+         :id="`checkbox-${data.item.Id}`"
+         :name="`checkbox-${data.item.Id}`"
+         v-model="checks[data.index]"
+         :value="data.item.Id"
+       />
+      </template>
       <template v-slot:cell(action)="data">
         <router-link :to="{name: 'detail', params: { id: data.item.Id }}">Detail</router-link> |
         <router-link :to="{name: 'edit', params: { id: data.item.Id }}">Edit</router-link> |
@@ -26,16 +34,20 @@ export default {
   data() {
     return {
       fields: [
+        { key: 'isCheck', label: '' },
         { key: 'action' },
         { key: 'Id', sortable: true },
         { key: 'Name', sortable: true },
         { key: 'CreatedDate', sortable: true },
       ],
       records: [],
+      checks: [],
     }
   },
   methods: {
     async destroy(sfid, index) {
+      //eslint-disable-next-line no-console
+      console.log(this.checks.filter((c) => c !== false))
       if (confirm(`本当に削除しますか？: ${sfid}`)) {
         await Account.destroy(sfid)
         this.records.splice(index, 1);
@@ -50,6 +62,10 @@ export default {
   async mounted() {
     const res = await Account.findAll()
     this.records = res.records
+    this.checks = []
+    res.records.forEach(() => {
+      this.checks.push(false)
+    })
   }
 }
 </script>
